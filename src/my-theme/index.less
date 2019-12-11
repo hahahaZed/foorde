@@ -1,0 +1,518 @@
+@import '~view-design/src/styles/index.less';
+// 定制主题哟
+@primary-color: #f64c16;
+
+@color-black :#20222A;
+@color-sub: #666869;
+@color-desc: #999b9c;
+
+@menu-dark-title: @color-black;
+@menu-dark-active-bg: rgba(0, 0, 0, .3);
+@layout-sider-background: @color-black;
+@primary-color: #f64c16;
+@font-size-base : 14px;
+@font-size-small : 14px;
+@font-size-large : 16px;
+
+@border-color-base : #eaeced;
+@border-color-split : #eeeff1;
+
+@border-radius-base : 2px;
+@border-radius-small : 2px;
+
+@btn-border-radius : 2px;
+@btn-border-radius-small: 2px;
+
+@link-color : #f64c16;
+@link-hover-color : tint(@link-color, 20%);
+@link-active-color : shade(@link-color, 5%);
+@selected-color : fade(@primary-color, 90%);
+
+@input-color : @color-black;
+
+@table-thead-bg: #f8fafb;
+@table-td-stripe-bg: #f8fafb;
+
+body {
+    min-width: 1180px
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+hr {
+    font-weight: 400
+}
+
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active,
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover {
+    background: #f64c16!important
+}
+
+.main .content-wrapper {
+    padding: 15px
+}
+
+.main .logo-con {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15);
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    background: #20222a;
+}
+
+.side-menu-wrapper {
+    padding-top: 64px
+}
+
+.sider-trigger-a i {
+    font-size: 20px !important;
+    line-height: 28px
+}
+
+.ivu-tag {
+    font-size: 14px;
+    padding: 0 12px
+}
+
+:root .tags-nav .scroll-outer {
+    box-shadow: none !important;
+    background: #fff !important;
+    left: 39px;
+    right: 71px
+}
+
+.tags-nav {
+    border-bottom: 0;
+    box-shadow: 0 1px 2px 0 rgba(120, 120, 120, .1);
+    z-index: 600
+}
+
+.tags-nav .scroll-outer .scroll-body {
+    padding: 0 !important;
+}
+
+.ivu-tag {
+    margin: 0 !important;
+    border-right: 1px solid #f6f6f6 !important;
+    border-width: 0 1px 0 0 !important;
+    height: 39px !important;
+    line-height: 40px !important;
+    border-radius: 0 !important;
+    background: #fff
+}
+
+.ivu-tag-primary .ivu-tag-text,
+.ivu-tag-primary .ivu-icon {
+    color: @link-color  !important
+}
+
+.ivu-tag-primary .ivu-icon {
+    color: #bbbebf !important
+}
+
+.ivu-tag:hover {
+    opacity: 1
+}
+
+.ivu-tag:hover .ivu-tag-text {
+    color: @color-black
+}
+
+:root .ivu-tag .ivu-icon-ios-close {
+    color: #bbbebf;
+    margin-left: 6px;
+    font-size: 16px
+}
+
+.tags-nav .btn-con.left-btn {
+    border-right: 1px solid #f6f6f6;
+    padding: 5px
+}
+
+.tags-nav .btn-con.right-btn {
+    border-left: 1px solid #f6f6f6;
+    padding: 5px
+}
+
+td.ivu-table-expanded-cell {
+    padding: 8px 50px 8px 67px !important;
+    background-color: #fafbfc
+}
+
+.ivu-table-small th {
+    height: 40px
+}
+
+.main .logo-con img {
+    width: 44px;
+    display: inline-block
+}
+
+.main .logo-con .name {
+    color: #fff;
+    line-height: 44px;
+    font-size: 16px;
+    position: absolute;
+    left: 68px
+}
+
+.side-menu-wrapper a.drop-menu-a {
+    text-align: left !important;
+    padding: 12px 22px
+}
+
+.ql-toolbar.ql-snow,
+.ql-container.ql-snow {
+    border-color: @border-color-base  !important
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+    outline: 0;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important
+}
+
+// .ivu-card-head{padding:4px 16px;}
+// .ivu-card-head p, .ivu-card-head-inner{font-weight:normal !important;line-height:28px;height:28px;overflow:unset}
+// .ivu-card-extra{top:8px;font-size:13px}
+// .ivu-breadcrumb > span:last-child{font-weight:normal !important}
+
+// .ivu-modal-header{padding:9px 16px}
+// .ivu-modal-header-inner{font-weight:normal }
+// .ivu-modal-close{top:5px}
+
+// .ivu-divider-horizontal{font-weight:normal !important;color:@color-sub !important;font-size:13px !important}
+
+.ue-float-right {
+    float: right
+}
+
+.ue-margin-right10 {
+    margin-right: 10px
+}
+
+.ue-page-wrap {
+    margin: 20px 0 10px;
+    overflow: hidden
+}
+
+.ue-page-wrap .ivu-page {
+    float: right
+}
+
+.ue-avatar-userprofile {
+    width: 84px;
+    height: 84px;
+    border-radius: 4px;
+    margin-bottom: 10px
+}
+
+.ue-upload-list {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+    position: relative;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    margin-right: 4px;
+}
+
+.ue-upload-list img {
+    width: 100%;
+    height: 100%;
+}
+
+.ue-upload-list-cover {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, .6);
+}
+
+.ue-upload-list:hover .ue-upload-list-cover {
+    display: block;
+}
+
+.ue-upload-list-cover i {
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.ue-reset.ivu-divider-horizontal {
+    margin: 8px 0 !important
+}
+
+.ue-reset .ivu-divider-inner-text {
+    color: @color-desc;
+    font-weight: normal
+}
+
+.ue-reset-small.ivu-divider-horizontal {
+    margin: 8px 0 !important
+}
+
+.quill-editor {
+    background: #fff;
+    margin-bottom: 16px
+}
+
+.ql-editor {
+    height: 400px !important
+}
+
+.ue-table-header {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.ue-table-header .header-title {
+    margin-bottom: 10px
+}
+
+.ue-table-header .ivu-select {
+    width: auto;
+    min-width: 120px
+}
+
+.ue-search {
+    width: 260px;
+    float: right;
+    position: absolute;
+    right: 0;
+    top: -4px
+}
+
+.ue-search .ivu-select {
+    width: auto;
+    min-width: auto
+}
+
+.ue-search .ivu-input-group-append,
+.ue-search .ivu-input-group-prepend {
+    background: #fff
+}
+
+.ue-art-img-thumb {
+    display: block;
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 1px solid #f6f6f6;
+}
+
+.ue-art-img-thumb img {
+    width: 100%;
+    display: block;
+    position: absolute;
+    object-fit: cover;
+    height: 100%;
+}
+
+.ue-art-img-thumb .action {
+    width: 100%;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    line-height: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, .4);
+    color: #fff;
+    text-align: center;
+    display: none;
+    cursor: pointer;
+}
+
+.ue-art-img-thumb .action span {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.ue-art-img-thumb:hover .action {
+    display: block;
+}
+
+.ue-hr-bottom18 {
+    border: 0;
+    padding-bottom: 18px
+}
+
+.ue-customer-header {
+    border: 1px solid @border-color-split;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    background: #fff
+}
+
+.ue-customer-header .title {
+    border-bottom: 1px solid @border-color-base;
+    padding: 12px 16px 12px 16px;
+}
+
+.ue-customer-header .ivu-tabs-bar {
+    margin: 0;
+    border: 0;
+    padding-left: 16px
+}
+
+.ue-customer-header .ivu-tabs-ink-bar {
+    display: none
+}
+
+.ue-customer-header .ivu-tabs-tab {
+    padding: 12px 0;
+    margin-right: 38px
+}
+
+.ue-q-price-wrap .ivu-card-body {
+    padding-bottom: 0
+}
+
+.ue-q-price-item {
+    height: 88px;
+    overflow: hidden;
+    background: @layout-body-background;
+    padding: 15px 12px 12px;
+    position: relative;
+    margin-bottom: 16px;
+    border: 1px solid @border-color-base;
+    border-radius: 2px
+}
+
+.ue-q-price-item dt {
+    color: #666;
+    line-height: 22px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right: 22px
+}
+
+.ue-q-price-item dd {
+    color: @link-color;
+    font-size: 26px
+}
+
+.ue-q-price-del {
+    position: absolute;
+    right: 12px;
+    top: 13px;
+    font-size: 17px;
+    color: #20222A;
+    cursor: pointer;
+    z-index: 500;
+    padding: 5px
+}
+
+.ue-q-price-del:hover {
+    color: @primary-color
+}
+
+.ue-q-price-add {
+    cursor: pointer;
+    height: 88px;
+    line-height: 88px;
+    border: 1px dashed @border-color-base;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 2px;
+    margin-bottom: 16px
+}
+
+.ue-record-item {
+    border-bottom: 1px dashed @border-color-base;
+    padding-bottom: 12px;
+    font-size: 13px;
+    margin-bottom: 14px
+}
+
+.ue-record-item .header {
+    position: relative;
+    padding-left: 48px;
+    margin-bottom: 10px
+}
+
+.ue-record-item .header .ivu-avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 38px;
+    width: 38px;
+    line-height: 38px
+}
+
+.ue-record-item .header .ivu-avatar>* {
+    line-height: 38px
+}
+
+.ue-record-item .header .title {
+    font-size: 14px
+}
+
+.ue-record-item .header .subtitle {
+    font: 12px;
+    color: @color-desc
+}
+
+.ue-record-item .header .action {
+    position: absolute;
+    top: -6px;
+    right: 0;
+    font-size: 17px;
+    color: @color-black
+}
+
+.ue-position-relative {
+    position: relative;
+}
+
+.ue-cell-data {}
+
+.ue-cell-data-item {
+    clear: both
+}
+
+.ue-cell-data-item:after {
+    clear: both;
+    display: table;
+    content: '';
+    line-height: 0
+}
+
+.ue-cell-data-label {
+    float: left;
+    display: block;
+    padding: 6px 0;
+    width: 70px;
+    line-height: 20px;
+    text-align: left;
+    color: @color-sub
+}
+
+.ue-cell-data-aux {
+    line-height: 20px;
+    padding: 6px 0 !important;
+    color: @color-black;
+    margin-left: 70px;
+}
