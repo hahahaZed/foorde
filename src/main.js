@@ -6,13 +6,23 @@ import './registerServiceWorker'
 import config from '@/config'
 import ViewUI from 'view-design'
 import 'view-design/dist/styles/iview.css'
-import { post, get } from './libs/request'
+import {
+  post,
+  get
+} from './libs/request'
 import '@/my-theme/index.less'
-// import '@/index.less';
+import '@/assets/reset.less'
+import {
+  locale,
+  Page
+} from 'view-design';
+import lang from 'view-design/dist/locale/en-US';
 
-
+locale(lang);
 
 Vue.use(ViewUI);
+
+Vue.component('Page', Page);
 
 Vue.config.productionTip = false
 

@@ -1,13 +1,15 @@
 import axios from '@/libs/axios'
 import store from '@/store'
 
-function loading (url, params, scope = 'default') {
+function loading(url, params, scope = 'default') {
   store.state.loading[scope] = true
   store.state.loading.message = ''
   return new Promise((resolve, reject) => {
-    axios.get(url, { params: params }).then(
+    axios.get(url, {
+      params: params
+    }).then(
       (res) => {
-        if (res.code !== 200) return (store.state.loading.message = res.message)
+        if (res.status !==1 ) return (store.state.loading.message = res.message)
         store.state.loading[scope] = false
         resolve(res)
       },
@@ -18,7 +20,7 @@ function loading (url, params, scope = 'default') {
   })
 }
 
-function silent (url, params) {
+function silent(url, params) {
   return new Promise((resolve, reject) => {
     axios.get(url, params).then(
       (res) => {

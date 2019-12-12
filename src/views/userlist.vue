@@ -9,7 +9,19 @@
                 </Breadcrumb>
                 <Card>
                     <div style="height: 600px">
-                        <Table stripe border :columns="columns1" :data="data1"></Table>
+                        <Table stripe border :columns="columns1" :data="data1">
+                            <template  slot="action">
+                                <Button type="info" size="small" class="mr-6">edit</Button>
+                                <Button type="error" size="small">delete</Button>
+                            </template>
+                        </Table>
+                        <Page
+                            class="page"
+                            :page-size="pageSize"
+                            :total="total"
+                            :current.sync="current"
+                            @on-change="changePage"
+                        />
                     </div>
                 </Card>
             </Content>
@@ -31,53 +43,68 @@ export default {
             return {
                 columns1: [
                     {
-                        title: 'user_name',
+                        title: 'User Name',
                         key: 'user_name'
                     },
                     {
-                        title: 'nick_name',
+                        title: 'Nick Name',
                         key: 'nick_name'
                     },
                     {
-                        title: 'email',
+                        title: 'Email',
                         key: 'email'
                     },
                     {
-                        title:'phone_number',
+                        title:'Phone Number',
                         key:'phone_number'
                     },
                     {
-                        title:'login_time',
+                        title:'Login Time',
                         key:'login_time'
                     },
                     {
-                        title:'login_ip',
+                        title:'Login Ip',
                         key:'login_ip'
                     },
                     {
-                        title:'create_time',
+                        title:'Create Time',
                         key:'create_time'
                     },
                     {
-                        title:'create_ip',
+                        title:'Create Ip',
                         key:'create_ip'
                     },
                     {
-                        title:'update_time',
+                        title:'Update Time',
                         key:'update_time'
+                    },
+                    {
+                        title:'Action',
+                        slot: 'action',
+                        align: 'center'
                     }
                 ],
-                data1: []
+                data1: [],//渲染数据
+                total:0,//数据总数
+                current:1,//当前页
+                pageSize:1,//每页条数
             }
         },
         created () {
-            this.$get('/api/admin.manager/lists',{page:1,limit:1}).then(res => {
-                console.log(res)
-                // this.data1=res.data.list
-                // console.log(this.data1)
-                // TODO 不能打印
-            })
-        }   
+            this.getdata()
+        },  
+        methods:{
+            getdata(){
+                this.$get('/api/admin.manager/lists',{page:this.current,limit:this.pageSize}).then(res => {   
+                    this.data1 = res.data.list
+                    this.total = res.data.totalPage * this.pageSize
+                })
+            },
+            // 切换页码时的回调，返回值是current
+            changePage(){
+                this.getdata()
+            }
+        }
 }
 </script>
 <style lang="less" scoped>
@@ -91,5 +118,9 @@ export default {
 .layout-header-bar {
     background: #fff;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.page {
+    float: right;
+    margin: 20px 0 6px;
 }
 </style>

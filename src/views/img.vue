@@ -10,7 +10,11 @@
                     <BreadcrumbItem>Layout</BreadcrumbItem>
                 </Breadcrumb>
                 <Card>
-                    <div style="height: 600px">Content</div>
+                    <div style="height: 600px">
+                        <Upload action="https://api.foorde.com/imags"  :headers="myHeaders" >
+                            <Button icon="ios-cloud-upload-outline">Upload files</Button>
+                        </Upload>
+                    </div>
                 </Card>
             </Content>
         </Layout>
@@ -20,13 +24,21 @@
 <script>
 import Menu from "_c/menu"
 import Header from "_c/header"
+import config from '@/config'
+import Cookies from 'js-cookie'
+const Token = Cookies.get('__gtr_admin_token__') 
 export default {
-  name: 'home',
+  name: 'img',
   components: {
       Menu,
       Header
   },
-  
+  data () {
+        return{
+            myHeaders:{token:Token},
+            actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/images'
+        }
+  }
 }
 </script>
 <style lang="less" scoped>

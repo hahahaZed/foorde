@@ -1,6 +1,6 @@
 import axios from '@/libs/axios'
 
-export function get (url, params = {}, loading = true) {
+export function get(url, params = {}, loading = true) {
   if (loading === true) {
     var that = this
     that.loading = true
@@ -8,12 +8,12 @@ export function get (url, params = {}, loading = true) {
 
   return new Promise((resolve, reject) => {
     axios.get(url, {
-      params: params
-    })
+        params: params
+      })
       .then(response => {
         if (loading === true) {
           that.loading = false
-          if (response.code !== 200) {
+          if (response.status !== 1) {
             return (that.loading = response.message)
           }
         }
@@ -25,7 +25,7 @@ export function get (url, params = {}, loading = true) {
   })
 }
 
-export function post (url, data = {}, loading = true) {
+export function post(url, data = {}, loading = true) {
   if (loading === true) {
     var that = this
     that.loading = true
@@ -35,7 +35,7 @@ export function post (url, data = {}, loading = true) {
       .then(response => {
         if (loading === true) {
           that.loading = false
-          if (response.code !== 200) {
+          if (response.status !== 1) {
             return that.$Message.warning(response.message)
           }
           that.$Message.success(response.message)
