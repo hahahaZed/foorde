@@ -21,8 +21,8 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: '',
-    pro: ''
+    dev: 'https://api.foorde.com',
+    pro: 'https://api.foorde.com'
     // dev: 'http://localhost/api/admin',
     // pro: 'http://localhost/api/admin'
   },

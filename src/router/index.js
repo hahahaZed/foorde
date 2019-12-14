@@ -21,7 +21,7 @@ const routes = [{
   {
     path:'/userlist',
     name:'userlist',
-    component: () => import('../views/userlist.vue')
+    component: () => import('../views/userlist')
   },
   {
     path:'/imgUpdate',
@@ -29,9 +29,9 @@ const routes = [{
     component: () => import('../views/img-update.vue')
   },
   {
-    path:'/img',
-    name:'img',
-    component: () => import('../views/img.vue')
+    path:'/imgup',
+    name:'imgup',
+    component: () => import('../views/imgup.vue')
   }
 ]
 

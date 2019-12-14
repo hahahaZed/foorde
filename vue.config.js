@@ -10,7 +10,7 @@ const resolve = dir => {
 // 例如：https://www.foobar.com/my-app/
 // 需要将它改为'/my-app/'
 // iview-admin线上演示打包路径： https://file.iviewui.com/admin-dist/
-const BASE_URL = process.env.NODE_ENV === 'production' ? '/admin' : '/'
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/' : '/'
 module.exports = {
   css:{
     loaderOptions:{
@@ -28,12 +28,12 @@ module.exports = {
   // then change this to '/my-app/'
 
   // baseUrl: BASE_URL,
-  // TODO 后面取消注释baseUrl
+  // publicPath: BASE_URL,
 
-  outputDir: '../public/admin',
+  // outputDir: '../public/admin',
 
   indexPath: process.env.NODE_ENV === 'production'
-    ? '../../resources/views/admin.blade.php'
+    ? 'index.html'
     : 'index.html',
   // tweak internal webpack configuration.
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
@@ -51,7 +51,8 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'https://api.foorde.com',
-        changeOrigin: true
+        secure: false,
+        changeOrigin: true,
       }
     }
   }

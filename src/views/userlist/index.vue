@@ -7,11 +7,15 @@
                 <Breadcrumb :style="{margin: '16px 0'}">
                     <BreadcrumbItem>userlist</BreadcrumbItem>
                 </Breadcrumb>
+                
+                <Add />
+                <Edit :modal="modal2"/>
                 <Card>
                     <div style="height: 600px">
                         <Table stripe border :columns="columns1" :data="data1">
                             <template  slot="action">
-                                <Button type="info" size="small" class="mr-6">edit</Button>
+                                <Button type="info" size="small" class="mr-6" @click="handleEdit()">edit</Button>
+                                <!-- TODO  编辑 -->
                                 <Button type="error" size="small">delete</Button>
                             </template>
                         </Table>
@@ -32,15 +36,20 @@
 <script>
 import Menu from "_c/menu"
 import Header from "_c/header"
-
+import Add from './add.vue'
+import Edit from './edit.vue'
 export default {
   name: 'home',
   components: {
       Menu,
-      Header
+      Header,
+      Add,
+      Edit
   },
   data () {
             return {
+                modal1: false,
+                modal2: false,
                 columns1: [
                     {
                         title: 'User Name',
@@ -62,26 +71,17 @@ export default {
                         title:'Login Time',
                         key:'login_time'
                     },
-                    {
-                        title:'Login Ip',
-                        key:'login_ip'
-                    },
+                    
                     {
                         title:'Create Time',
                         key:'create_time'
                     },
-                    {
-                        title:'Create Ip',
-                        key:'create_ip'
-                    },
-                    {
-                        title:'Update Time',
-                        key:'update_time'
-                    },
+                   
+                    
                     {
                         title:'Action',
                         slot: 'action',
-                        align: 'center'
+                        align: 'center',
                     }
                 ],
                 data1: [],//渲染数据
@@ -95,7 +95,8 @@ export default {
         },  
         methods:{
             getdata(){
-                this.$get('/api/admin.manager/lists',{page:this.current,limit:this.pageSize}).then(res => {   
+                this.$get('/admin/manager',{page:this.current,limit:this.pageSize}).then(res => {   
+                    console.log(res.data.list)
                     this.data1 = res.data.list
                     this.total = res.data.totalPage * this.pageSize
                 })
@@ -103,6 +104,9 @@ export default {
             // 切换页码时的回调，返回值是current
             changePage(){
                 this.getdata()
+            },
+            handleEdit(){
+                this.modal2 = true
             }
         }
 }

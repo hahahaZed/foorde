@@ -46,7 +46,7 @@
                             :on-exceeded-size="handleMaxSize"
                             multiple
                             type="drag"
-                            :action="actionurl"
+                            action="https://api.foorde.com/imags"
                             :headers="myHeaders"
                             style="display: inline-block;width:58px;"
                         >
@@ -96,7 +96,7 @@ export default {
                 visible: false,
                 uploadList: [],
                 myHeaders:{token:Token},
-                actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/images'
+                actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
       }
   },
   methods: {
@@ -134,9 +134,6 @@ export default {
             //     }
             //     return check;
             // }
-        },
-        created(){
-            console.log(this.myHeaders)
         },
         mounted () {
             this.uploadList = this.$refs.upload.fileList;

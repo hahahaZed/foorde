@@ -14,9 +14,9 @@
                 <Icon type="ios-navigate"></Icon>
                 <span>imgUpdate</span>
             </MenuItem>
-            <MenuItem name="img" >
+            <MenuItem name="imgup" >
                 <Icon type="ios-navigate"></Icon>
-                <span>img</span>
+                <span>imgup</span>
             </MenuItem>
             <Submenu name="1">
                 <template slot="title">

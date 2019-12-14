@@ -28,7 +28,7 @@ import config from '@/config'
 import Cookies from 'js-cookie'
 const Token = Cookies.get('__gtr_admin_token__') 
 export default {
-  name: 'img',
+  name: 'imgup',
   components: {
       Menu,
       Header
@@ -36,7 +36,7 @@ export default {
   data () {
         return{
             myHeaders:{token:Token},
-            actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/images'
+            actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
         }
   }
 }
