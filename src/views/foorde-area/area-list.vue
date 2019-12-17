@@ -5,34 +5,31 @@
             <Header />
             <Content :style="{padding: '0 16px 16px'}">
                 <Breadcrumb :style="{margin: '16px 0'}">
-                    <BreadcrumbItem>userlist</BreadcrumbItem>
+                    <BreadcrumbItem>arealist</BreadcrumbItem>
                 </Breadcrumb>
 
-                <Add />
-                <Edit  :data="adminData" />
+                <Button type="primary" class="mb-10 add" :to="{name:'area'}">add</Button>
+                <Edit  :data="adminData"/>
                 <Card>
                     <div style="height: 600px">
                         <Table stripe border :columns="columns1" :data="data1">
                             <template slot-scope="{ row}" slot="id">
                                 <span>{{ row.id }}</span>
                             </template>
-                            <template slot-scope="{ row}" slot="user_name">
-                                <span>{{ row.user_name }}</span>
+                            <template slot-scope="{ row}" slot="name">
+                                <span>{{ row.name }}</span>
                             </template>
-                            <template slot-scope="{ row}" slot="nick_name">
-                                <span>{{ row.nick_name }}</span>
+                            <template slot-scope="{ row}" slot="city">
+                                <span>{{ row.city }}</span>
                             </template>
-                            <template slot-scope="{ row}" slot="email">
-                                <span>{{ row.email }}</span>
-                            </template>
-                            <template slot-scope="{ row}" slot="phone_number">
-                                <span>{{ row.phone_number }}</span>
-                            </template>
-                            <template slot-scope="{ row}" slot="login_time">
-                                <span>{{ row.login_time }}</span>
+                            <template slot-scope="{ row}" slot="location">
+                                <span>{{ row.location }}</span>
                             </template>
                             <template slot-scope="{ row}" slot="create_time">
                                 <span>{{ row.create_time }}</span>
+                            </template>
+                            <template slot-scope="{ row}" slot="update_time">
+                                <span>{{ row.update_time }}</span>
                             </template>
 
                             <template slot="action" slot-scope="{ row, index }">
@@ -62,15 +59,13 @@
 <script>
 import Menu from "_c/menu"
 import Header from "_c/header"
-import Add from './add.vue'
 import Edit from './edit.vue'
 import Bus from '@/assets/Bus.js'
 export default {
-  name: 'userlist',
+  name: 'arealist',
   components: {
       Menu,
       Header,
-      Add,
       Edit
   },
   data () {
@@ -84,30 +79,26 @@ export default {
                         slot: 'id'
                     },
                     {
-                        title: 'User Name',
-                        slot: 'user_name'
+                        title: 'Name',
+                        slot: 'name'
                     },
                     {
-                        title: 'Nick Name',
-                        slot: 'nick_name'
+                        title: 'City',
+                        slot: 'city'
                     },
                     {
-                        title: 'Email',
-                        slot: 'email'
+                        title:'Location',
+                        slot:'location'
                     },
-                    {
-                        title:'Phone Number',
-                        slot:'phone_number'
-                    },
-                    {
-                        title:'Login Time',
-                        slot:'login_time'
-                    },
-                    
                     {
                         title:'Create Time',
                         slot:'create_time'
                     },
+                    {
+                        title:'Update Time',
+                        slot:'update_time'
+                    },
+
                     {
                         title:'Action',
                         slot: 'action',
@@ -118,7 +109,7 @@ export default {
                 total:0,//数据总数
                 current:1,//当前页
                 pageSize:1,//每页条数
-                adminData:{},
+                adminData:{}
             }
         },
         created () {
@@ -126,7 +117,7 @@ export default {
         },  
         methods:{
             getdata(){
-                this.$get('/admin/manager',{page:this.current,limit:this.pageSize}).then(res => {   
+                this.$get('/admin/area',{page:this.current,limit:this.pageSize}).then(res => {   
                     this.data1 = res.data.list
                     this.total = res.data.totalPage * this.pageSize
                 })
@@ -138,10 +129,10 @@ export default {
             handleEdit(row){
                 const id = row.id
                 this.modal2 = true
-                Bus.$emit('show', 
+                 Bus.$emit('showbox', 
                 this.modal2
             );
-                this.$get('/admin/manager/'+ id ).then(res=>{
+                this.$get('/admin/area/'+ id ).then(res=>{
                     this.adminData = res.data
                     this.modal2 = true
                 })

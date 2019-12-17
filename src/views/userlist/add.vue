@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Button type="primary" class="mb-10" @click="modal1 = true">add</Button>
+        <Button type="primary" class="mb-10 add" @click="modal1 = true">add</Button>
         <Modal v-model="modal1" title="Add user" :footer-hide="true">
             <Form :model="form" label-position="left" :label-width="100">
                 <FormItem label="User Name">

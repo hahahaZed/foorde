@@ -17,10 +17,16 @@ import {
   Page
 } from 'view-design';
 import lang from 'view-design/dist/locale/en-US';
+import BaiduMap from 'vue-baidu-map'
 
 locale(lang);
 
 Vue.use(ViewUI);
+
+Vue.use(BaiduMap, {
+  // ak 是在百度地图开发者平台申请的密钥 详见 http://lbsyun.baidu.com/apiconsole/key */
+  ak: 'vw4d2ZziQimMkwAON1Z1wTTRriEYukId'
+})
 
 Vue.component('Page', Page);
 

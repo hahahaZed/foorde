@@ -38,7 +38,7 @@ export default {
 
     handleLogin ({ commit }, that) {
       that.loading = true
-      return post('/api/admin.login', that.form,false)
+      return post('/login/admin', that.form,false)
         .then(response => {
           console.log(response)
           that.loading = false
@@ -77,6 +77,7 @@ export default {
     },
 
     getUserInfo ({ commit }) {
+      // TODO 暂时没用到
       return get('/auth/get', {}, false).then(res => {
         if (res.code === 200) {
           const data = res.data
