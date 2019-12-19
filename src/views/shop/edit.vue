@@ -5,10 +5,11 @@
                 <Input v-model="data.name" />
             </FormItem>
             <FormItem label="Logo">
-                <img :src="data.logo" />
+                <!-- <img :src="data.logo" /> -->
+                <Logo />
             </FormItem>
             <FormItem label="License">
-                <img :src="data.license" />
+                <License/>
             </FormItem>
             <FormItem label="Desc">
                 <Input type="textarea" v-model="data.desc" />
@@ -69,14 +70,21 @@
 </template>
 <script>
 import Bus from '@/assets/Bus.js'
+import Logo from './logo-update.vue'
+import License from './license-update.vue'
 export default {
     props:{
         data:Object
     },
-    
+    components: {
+        Logo,
+        License
+    },
     data () {
             return {
                 modal2:false,
+                oldlogo:'',
+                oldLicense:'',
                 form: {
                     id:'',
                     name: '',
@@ -107,25 +115,56 @@ export default {
     created(){
         Bus.$on('showshop',(e)=>{
             this.modal2 = e
+        }) 
+        Bus.$on('oldlogo',(e)=>{
+            this.oldlogo = e
         })
+        Bus.$on('oldLicense',(e)=>{
+            this.oldLicense = e
+        })
+        // if(this.data){
+        //         Bus.$emit('logo',
+        //         this.data.logo
+        //     )
+        // }
+        
         // this.area = this.data.area
+    },
+    watch: {
+        
+        data:function(val,old){
+            console.log(val, old)
+            if(val!= old){
+                Bus.$emit('logo',
+                    val.logo
+                )
+                Bus.$emit('License',val.license)
+            }
+        },
+        oldlogo:function(val){
+            this.form.logo = val    
+        },
+        oldLicense:function(val){
+            this.form.license = val
+        }
     },
      methods: {
             edit () {
-                this.form.user_name = this.data.user_name
-                this.form.nick_name = this.data.nick_name
-                this.form.email = this.data.email
-                this.form.phone_number = this.data.phone_number
-                this.form.password = this.data.password
-                this.form.id = this.data.id
-                this.$post('api/admin.manager/edit',this.form).then(res => {
-                    if(res.status !== 1){
-                        console.log(res.status)
-                        this.moda2 =true
-                    }else{
-                        this.modal2=false
-                    }
-                })
+                console.log(this.form.license)
+                // this.form.user_name = this.data.user_name
+                // this.form.nick_name = this.data.nick_name
+                // this.form.email = this.data.email
+                // this.form.phone_number = this.data.phone_number
+                // this.form.password = this.data.password
+                // this.form.id = this.data.id
+                // this.$post('api/admin.manager/edit',this.form).then(res => {
+                //     if(res.status !== 1){
+                //         console.log(res.status)
+                //         this.moda2 =true
+                //     }else{
+                //         this.modal2=false
+                //     }
+                // })
             },
             areatype(){
 

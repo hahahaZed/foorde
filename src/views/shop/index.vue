@@ -8,7 +8,8 @@
                     <BreadcrumbItem>shop</BreadcrumbItem>
                 </Breadcrumb>
 
-                <Add />
+                <!-- <Add /> -->
+                <Button type="primary" class="mb-10 add"  :to="{name:'addshop'}">add</Button>
                 <Edit  :data="adminData" />
                 <Card>
                     <div style="height: 860px">
@@ -76,15 +77,15 @@
 <script>
 import Menu from "_c/menu"
 import Header from "_c/header"
-import Add from './add.vue'
+
 import Edit from './edit.vue'
-import Bus from '@/assets/Bus.js'
+
 export default {
   name: 'userlist',
   components: {
       Menu,
       Header,
-      Add,
+      
       Edit
   },
   data () {
@@ -181,14 +182,18 @@ export default {
             },
             handleEdit(row){
                 const id = row.id
-                this.modal2 = true
-                Bus.$emit('showshop', 
-                this.modal2
-            );
-                this.$get('/admin/shop/'+ id ).then(res=>{
-                    this.adminData = res.data
-                    this.modal2 = true
+            //     this.modal2 = true
+            //     Bus.$emit('showshop', 
+            //     this.modal2
+            // );
+                this.$router.push({
+                    name: 'editshop',
+                    query:{id}
                 })
+                // this.$get('/admin/shop/'+ id ).then(res=>{
+                //     this.adminData = res.data
+                //     this.modal2 = true
+                // })
             }
         }
 }

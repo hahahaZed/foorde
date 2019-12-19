@@ -46,17 +46,16 @@
                             :on-exceeded-size="handleMaxSize"
                             multiple
                             type="drag"
-                            action="https://api.foorde.com/imags"
-                            :headers="myHeaders"
+                            action="https://api.foorde.com/imags?desc=Shop logo&category=logo"
                             style="display: inline-block;width:58px;"
                         >
                             <div style="width: 58px;height:58px;line-height: 58px;">
                                 <Icon type="ios-camera" size="20"></Icon>
                             </div>
                         </Upload>
-                        <Modal title="View Image" v-model="visible">
+                        <Modal title="View Image" v-model="visible" footer-hide>
                             <img
-                                :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'"
+                                :src="imgName "
                                 v-if="visible"
                                 style="width: 100%"
                             />
@@ -71,9 +70,6 @@
 <script>
 import Menu from "_c/menu"
 import Header from "_c/header"
-import config from '@/config'
-import Cookies from 'js-cookie'
-const Token = Cookies.get('__gtr_admin_token__') 
 export default {
   name: 'imgUpdate',
   components: {
@@ -82,23 +78,14 @@ export default {
   },
   data () {
       return{
-          defaultList: [
-                    {
-                        'name': 'a42bdcc1178e62b4694c830f028db5c0',
-                        'url': 'https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar'
-                    },
-                    {
-                        'name': 'bc7521e033abdd1e92222d733590f104',
-                        'url': 'https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar'
-                    }
-                ],
+          defaultList: [],
                 imgName: '',
                 visible: false,
                 uploadList: [],
-                myHeaders:{token:Token},
-                actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
+                // actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
       }
   },
+  
   methods: {
             handleView (name) {
                 this.imgName = name;
@@ -109,9 +96,8 @@ export default {
                 this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
             },
             handleSuccess (res, file) {
-                console.log(res)
-                file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar';
-                file.name = '7eb99afb9d5f317c912f08b5212fd69a';
+                file.url =  res.data.url;
+                file.name =  res.data.url;
             },
             handleFormatError (file) {
                 this.$Notice.warning({

@@ -86,7 +86,7 @@ export default {
       zoom: 13,
 
       cityList: [],
-        model1: '',
+        model1: 0,
         city:0,
         tude:""
     }
@@ -146,6 +146,7 @@ export default {
     width: 100%;
     height: 600px;
     position: absolute;
+    overflow: hidden;
     padding-right: 32px;
     padding-top: 16px;
 }

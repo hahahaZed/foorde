@@ -16,7 +16,7 @@
                 </FormItem>
                 <FormItem label="License">
                     <Upload
-                        action="https://api.foorde.com/imags?desc=Business license address&category=license "
+                        action="https://api.foorde.com/imags?desc=Business license address&category=license"
                         :on-success="uploadlicense"
                     >
                         <Button icon="ios-cloud-upload-outline">Upload files</Button>
