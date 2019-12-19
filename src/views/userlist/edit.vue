@@ -23,7 +23,6 @@
 <script>
 import Bus from '@/assets/Bus.js'
 export default {
-    // TODO 单向数据流
     props:{
         data:Object
     },

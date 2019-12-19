@@ -11,7 +11,7 @@
                 </Breadcrumb>
                 <Card>
                     <div style="height: 600px">
-                        <Upload action="https://api.foorde.com/imags"  :headers="myHeaders" >
+                        <Upload action="https://api.foorde.com/imags"   :on-success	="upload">
                             <Button icon="ios-cloud-upload-outline">Upload files</Button>
                         </Upload>
                     </div>
@@ -24,9 +24,9 @@
 <script>
 import Menu from "_c/menu"
 import Header from "_c/header"
-import config from '@/config'
-import Cookies from 'js-cookie'
-const Token = Cookies.get('__gtr_admin_token__') 
+// import config from '@/config'
+// import Cookies from 'js-cookie'
+// const Token = Cookies.get('__gtr_admin_token__') 
 export default {
   name: 'imgup',
   components: {
@@ -35,9 +35,14 @@ export default {
   },
   data () {
         return{
-            myHeaders:{token:Token},
-            actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
+            // myHeaders:{token:Token},
+            // actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
         }
+  },
+  methods:{
+      upload(response){
+          console.log(response)
+      }
   }
 }
 </script>

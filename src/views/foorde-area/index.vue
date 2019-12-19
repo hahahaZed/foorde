@@ -9,23 +9,27 @@
                 </Breadcrumb>
                 <Card>
                     <div style="height: 700px">
-                      
-                            <label>
-                                location:
-                                <Select v-model="model1" style="width:200px" label-in-value @on-change="select">
-                            <Option
-                                v-for="item in cityList"
-                                :value="item.value"
-                                :key="item.value"
-                            >{{ item.label }}</Option>
-                        </Select>
-                            </label>
-                      
+                        <label>
+                            location:
+                            <Select
+                                v-model="model1"
+                                style="width:200px"
+                                label-in-value
+                                @on-change="select"
+                            >
+                                <Option
+                                    v-for="item in cityList"
+                                    :value="item.value"
+                                    :key="item.value"
+                                >{{ item.label }}</Option>
+                            </Select>
+                        </label>
+
                         <label>
                             keyword:
-                            <input v-model="keyword" style="width:200px;height:32px"/>
+                            <input v-model="keyword" style="width:200px;height:32px" />
                         </label>
-                        <Button type="primary" class="ml-10" @click="handelCreate">create</Button>
+                        <Button type="primary" class="ml-10" @click="handelCreate">submit</Button>
 
                         <baidu-map
                             class="bm-view"
@@ -92,7 +96,6 @@ export default {
           res.data.forEach(element =>{
               this.cityList.push({label:element,value:res.data.indexOf(element)})
           })
-        //   console.log(this.cityList)
       })
   },
   methods: {
@@ -144,7 +147,7 @@ export default {
     height: 600px;
     position: absolute;
     padding-right: 32px;
-    padding-top:16px;
+    padding-top: 16px;
 }
 .bm-view > div:nth-child(3) {
     position: absolute;

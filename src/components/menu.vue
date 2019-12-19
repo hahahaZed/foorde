@@ -2,7 +2,7 @@
     <Sider :width="250" :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
         <div class="logo-con">
             <img :src="minLogo" key="min-logo" style="background: #ffffff90;border-radius: 5px;" />
-            <span class="name">Orders</span>
+            <span class="name">foorde</span>
         </div>
         <!-- <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']"> -->
         <Menu

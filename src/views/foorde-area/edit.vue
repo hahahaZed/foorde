@@ -8,7 +8,8 @@
                 <Input v-model="data.city" />
             </FormItem>
             <FormItem label="Location">
-                <Input v-model="data.location" />
+                <!-- <Input v-model="data.location" /> -->
+                <button to="{name:'area'}">aa</button>
             </FormItem>
         </Form>
         <Button type="primary" size="large" long @click="edit">ok</Button>
@@ -17,7 +18,6 @@
 <script>
 import Bus from '@/assets/Bus.js'
 export default {
-    // TODO 单向数据流
     props:{
         data:Object
     },
