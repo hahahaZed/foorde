@@ -1,7 +1,7 @@
 <template>
-    <div >
+    <div>
         <div class="demo-upload-list" v-for="(item,index) in uploadList" :key="index">
-            <template >
+            <template>
                 <img :src="item.url" />
                 <div class="demo-upload-list-cover">
                     <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
@@ -20,7 +20,7 @@
             :on-exceeded-size="handleMaxSize"
             multiple
             type="drag"
-            action="https://api.foorde.com/imags?desc=Business license address&category=license"
+            :action="actionurl"
             style="display: inline-block;width:58px;"
         >
             <div style="width: 58px;height:58px;line-height: 58px;">
@@ -35,6 +35,7 @@
 
 <script>
 import Bus from '@/assets/Bus.js'
+import config from '@/config'
 export default {
   name: 'LicenseUpdate',
   porps:{
@@ -46,7 +47,7 @@ export default {
                 imgName: '',
                 visible: false,
                 uploadList: [],
-                // actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
+                actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags?desc=Business license address&category=license'
       }
   },
 

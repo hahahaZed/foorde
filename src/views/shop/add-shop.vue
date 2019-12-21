@@ -51,6 +51,9 @@
                             <FormItem label="Address">
                                 <Input v-model="form.address" style="width:388px" />
                             </FormItem>
+                            <FormItem label="Location">
+                                <div>{{form.location}}</div><Button @click="toarea">Select region</Button>
+                            </FormItem>
                             <FormItem label="Email">
                                 <Input v-model="form.email" style="width:388px" />
                             </FormItem>
@@ -132,6 +135,7 @@ export default {
                     desc:'',
                     area_id:'',
                     address:'',
+                    location:'',
                     email:'',
                     shop_type:'',
                     food_type:'',
@@ -181,6 +185,9 @@ export default {
         Bus.$on('addlicense',(e) =>{
             this.form.license = e
         })
+        Bus.$on('shop',(e) =>{
+            this.form.location = e
+        })
     },
      methods: {
             async add(){
@@ -194,36 +201,34 @@ export default {
             },
             // 上传logo
             upload(response){
-                console.log(response)
                 this.form.logo = response.data.url
-                console.log(this.form.logo)
             },
             // 上传营业执照
             uploadlicense(response){
-                console.log(response)
                 this.form.license = response.data.url
-                console.log(this.form.logo)
             },
 
             // 营业类型
             selecttype(val){
                 this.form.shop_type = val.value
-                console.log(this.form.shop_type)
             },
             // 食物类型
             foodtype(val){
                 this.form.food_type = val.value
-                console.log(this.form.food_type)
             },
             // 服务类型
             servicetype(val){
                 this.form.service_type = val.value
-                console.log(this.form.service_type)
             },
             // 区域
             areatype(val){
-                console.log(val)
                 this.form.area_id = val.value
+            },
+            toarea(){
+                this.$router.push({
+                    name:'area',
+                    query:{shop:'addshoparae'}
+                })
             }
         }
 }

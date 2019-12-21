@@ -56,9 +56,13 @@ export default {
                 this.$post('api/admin.manager/edit',this.form).then(res => {
                     if(res.status !== 1){
                         console.log(res.status)
-                        this.moda2 =true
+                        this.modal2 =true
                     }else{
                         this.modal2=false
+                        setTimeout(() => {
+                            this.$router.go(0)
+                        },500)
+                        
                     }
                 })
             },

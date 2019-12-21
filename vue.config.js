@@ -10,7 +10,7 @@ const resolve = dir => {
 // 例如：https://www.foobar.com/my-app/
 // 需要将它改为'/my-app/'
 // iview-admin线上演示打包路径： https://file.iviewui.com/admin-dist/
-const BASE_URL = process.env.NODE_ENV === 'production' ? '/' : '/'
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/admin' : '/'
 module.exports = {
   css:{
     loaderOptions:{
@@ -28,6 +28,9 @@ module.exports = {
   // then change this to '/my-app/'
 
   // baseUrl: BASE_URL,
+  outputDir: '../public/admin',
+
+ 
   // publicPath: BASE_URL,
 
   // outputDir: '../public/admin',

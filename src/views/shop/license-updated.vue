@@ -23,7 +23,7 @@
             :on-exceeded-size="handleMaxSize"
             multiple
             type="drag"
-            action="https://api.foorde.com/imags?desc=Business license address&category=license"
+            :action="actionurl"
             style="display: inline-block;width:58px;"
         >
             <div style="width: 58px;height:58px;line-height: 58px;">
@@ -38,6 +38,7 @@
 
 <script>
 import Bus from '@/assets/Bus.js'
+import config from '@/config'
 export default {
   name: 'licenseUpdate',
   
@@ -47,7 +48,7 @@ export default {
                 imgName: '',
                 visible: false,
                 uploadList: [],
-                // actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
+                actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags?desc=Business license address&category=license'
       }
   },
   

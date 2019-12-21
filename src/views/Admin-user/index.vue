@@ -5,31 +5,37 @@
             <Header />
             <Content :style="{padding: '0 16px 16px'}">
                 <Breadcrumb :style="{margin: '16px 0'}">
-                    <BreadcrumbItem>arealist</BreadcrumbItem>
+                    <BreadcrumbItem>adminList</BreadcrumbItem>
                 </Breadcrumb>
-
-                <Button type="primary" class="mb-10 add" :to="{name:'area'}">add</Button>
-                <Edit  :data="adminData"/>
                 <Card>
                     <div style="height: auto">
                         <Table stripe border :columns="columns1" :data="data1">
                             <template slot-scope="{ row}" slot="id">
                                 <span>{{ row.id }}</span>
                             </template>
-                            <template slot-scope="{ row}" slot="name">
-                                <span>{{ row.name }}</span>
+                            <template slot-scope="{ row}" slot="user_name">
+                                <span>{{ row.user_name }}</span>
                             </template>
-                            <template slot-scope="{ row}" slot="city">
-                                <span>{{ row.city }}</span>
+                            <template slot-scope="{ row}" slot="nick_name">
+                                <span>{{ row.nick_name }}</span>
                             </template>
-                            <template slot-scope="{ row}" slot="location">
-                                <span>{{ row.location }}</span>
+                            <template slot-scope="{ row}" slot="shop_id">
+                                <span>{{ row.shop_id }}</span>
                             </template>
-                            <template slot-scope="{ row}" slot="create_time">
-                                <span>{{ row.create_time }}</span>
+                            <template slot-scope="{ row}" slot="email">
+                                <span>{{ row.email }}</span>
                             </template>
-                            <template slot-scope="{ row}" slot="update_time">
-                                <span>{{ row.update_time }}</span>
+                            <template slot-scope="{ row}" slot="is_root">
+                                <span>{{ row.is_root }}</span>
+                            </template>
+                            <template slot-scope="{ row}" slot="phone_number">
+                                <span>{{ row.phone_number }}</span>
+                            </template>
+                            <template slot-scope="{ row}" slot="job_number">
+                                <span>{{ row.job_number }}</span>
+                            </template>
+                            <template slot-scope="{ row}" slot="position">
+                                <span>{{ row.position }}</span>
                             </template>
 
                             <template slot="action" slot-scope="{ row, index }">
@@ -59,46 +65,52 @@
 <script>
 import Menu from "_c/menu"
 import Header from "_c/header"
-import Edit from './edit.vue'
-import Bus from '@/assets/Bus.js'
 export default {
-  name: 'arealist',
+  name: 'adminlist',
   components: {
       Menu,
-      Header,
-      Edit
+      Header
   },
   data () {
-            return {
-                modal1: false,
-                modal2: false,
-                id:'',
-                columns1: [
+      return {
+          columns1: [
                     {
                         title: 'Id',
                         slot: 'id'
                     },
                     {
-                        title: 'Name',
-                        slot: 'name'
+                        title: 'User Name',
+                        slot: 'user_name'
                     },
                     {
-                        title: 'City',
-                        slot: 'city'
+                        title: 'Nick Name',
+                        slot: 'nick_name'
                     },
                     {
-                        title:'Location',
-                        slot:'location'
+                        title: 'Shop Id',
+                        slot: 'shop_id'
                     },
                     {
-                        title:'Create Time',
-                        slot:'create_time'
+                        title: 'Email',
+                        slot: 'email'
                     },
                     {
-                        title:'Update Time',
-                        slot:'update_time'
+                        title: 'Is Root',
+                        slot: 'is_root'
                     },
-
+                    {
+                        title:'Phone Number',
+                        slot:'phone_number'
+                    },
+                    {
+                        title:'Job Number',
+                        slot:'job_number'
+                    },
+                    
+                    {
+                        title:'Position',
+                        slot:'position'
+                    },
                     {
                         title:'Action',
                         slot: 'action',
@@ -108,37 +120,31 @@ export default {
                 data1: [],//渲染数据
                 total:0,//数据总数
                 current:1,//当前页
-                pageSize:1,//每页条数
-                adminData:{}
-            }
+                pageSize:5,//每页条数
+                adminData:{},
+      }
+  },
+  created(){
+      this.getdata()
+  },
+  methods:{
+      getdata(){
+          this.$get('/admin/buser',{page:this.current,limit:this.pageSize}).then(res =>{
+            this.data1 = res.data.list
+            this.total = res.data.totalPage * this.pageSize
+      })
+      },
+      handleEdit(row){
+            const id = row.id
+            this.$router.push({
+                name: 'adminAdd',
+                query:{id}
+            })
         },
-        created () {
-            this.getdata()
-        },  
-        methods:{
-            getdata(){
-                this.$get('/admin/area',{page:this.current,limit:this.pageSize}).then(res => {   
-                    this.data1 = res.data.list
-                    this.total = res.data.totalPage * this.pageSize
-                })
-            },
-            // 切换页码时的回调，返回值是current
-            changePage(){
-                this.getdata()
-            },
-            handleEdit(row){
-                const id = row.id
-                this.modal2 = true
-                 Bus.$emit('showbox', 
-                this.modal2
-                );
-                this.$get('/admin/area/'+ id ).then(res=>{
-                    this.adminData = res.data
-                    this.modal2 = true
-                    Bus.$emit('city',res.data.city)
-                })
-            }
-        }
+      changePage(){
+        this.getdata()
+    },
+  }
 }
 </script>
 <style lang="less" scoped>

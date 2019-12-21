@@ -40,13 +40,11 @@ export default {
       that.loading = true
       return post('/login/admin', that.form,false)
         .then(response => {
-          console.log(response)
           that.loading = false
           // if (response.code !== 200) {
           //   return that.$Message.warning(response.message)
           // }
           that.$Message.success(response.message)
-          console.log(response.data.token)
           setToken(response.data.token)
           commit('setAccess', [])
           commit('setToken', response.data.token)

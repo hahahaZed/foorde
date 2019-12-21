@@ -12,15 +12,19 @@
             accordion
             @on-select="turnToPage"
         >
+            <MenuItem name="adminList">
+                <Icon type="ios-navigate"></Icon>
+                <span>admin</span>
+            </MenuItem>
             <MenuItem name="userlist">
                 <Icon type="ios-navigate"></Icon>
-                <span>userlist</span>
+                <span>user</span>
             </MenuItem>
             <!-- <MenuItem name="area" >
                 <Icon type="ios-navigate"></Icon>
                 <span>area</span>
             </MenuItem>-->
-            <Submenu name="1">
+            <!-- <Submenu name="1">
                 <template slot="title">
                     <Icon type="ios-navigate"></Icon>area
                 </template>
@@ -30,21 +34,31 @@
                 </MenuItem>
                 <MenuItem name="areaList">
                     <Icon type="ios-navigate"></Icon>
-                    <span>area-list</span>
+                    <span>area</span>
                 </MenuItem>
-            </Submenu>
+            </Submenu> -->
+            <MenuItem name="areaList">
+                    <Icon type="ios-navigate"></Icon>
+                    <span>area</span>
+                </MenuItem>
+            
+            <!-- <MenuItem name="adminAdd">
+                    <Icon type="ios-navigate"></Icon>
+                    <span>admin-add</span>
+            </MenuItem>-->
+
             <MenuItem name="shop">
                 <Icon type="ios-navigate"></Icon>
                 <span>shop</span>
             </MenuItem>
-            <MenuItem name="imgUpdate">
+            <!-- <MenuItem name="imgUpdate">
                 <Icon type="ios-navigate"></Icon>
                 <span>imgUpdate</span>
-            </MenuItem>
-            <MenuItem name="imgup">
+            </MenuItem> -->
+            <!-- <MenuItem name="imgup">
                 <Icon type="ios-navigate"></Icon>
                 <span>imgup</span>
-            </MenuItem>
+            </MenuItem> -->
         </Menu>
     </Sider>
 </template>

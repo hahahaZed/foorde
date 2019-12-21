@@ -8,7 +8,7 @@
                     <BreadcrumbItem>Home</BreadcrumbItem>
                 </Breadcrumb>
                 <Card>
-                    <div style="height: 600px">Content</div>
+                    <div style="height: auto">Content</div>
                 </Card>
             </Content>
         </Layout>

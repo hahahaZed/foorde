@@ -2,7 +2,7 @@
     <div>
         <div class="demo-upload-list" v-for="(item,index) in uploadList" :key="index">
             <template v-if="item.status === 'finished'">
-                <img :src="item.url" />
+                <img :src="item.url" v-if='item.url'/>
                 <div class="demo-upload-list-cover">
                     <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
                     <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>

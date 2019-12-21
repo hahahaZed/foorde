@@ -46,11 +46,11 @@
                                 :dragging="true"
                                 animation="BMAP_ANIMATION_BOUNCE"
                             ></bm-marker>
-                            <bm-local-search
+                            <!-- <bm-local-search
                                 :keyword="keyword"
                                 :location="location"
                                 :auto-viewport="true"
-                            ></bm-local-search>
+                            ></bm-local-search> -->
                         </baidu-map>
                         <div style="position:absolute;right:16px;top:16px">
                             <input v-model.number="center.lng" />
@@ -62,6 +62,7 @@
             </Content>
         </Layout>
     </div>
+    <!-- TODO 标记点不要居中 -->
 </template>
 
 
@@ -69,6 +70,7 @@
 <script>
 import Menu from "_c/menu"
 import Header from "_c/header"
+import Bus from '@/assets/Bus.js'
 export default {
   name: 'foordearea',
   components: {
@@ -97,13 +99,17 @@ export default {
               this.cityList.push({label:element,value:res.data.indexOf(element)})
           })
       })
+      if(this.$route.query.id){
+          var location = this.$route.query.location.split('|')
+            this.center.lng =location[0]
+            this.center.lat = location[1]
+      }
   },
   methods: {
     getClickInfo(e) {
         this.center.lng = e.point.lng
         this.center.lat = e.point.lat
         this.tude = this.center.lng + "|" + this.center.lat
-        // console.log(this.tude)
     },
     syncCenterAndZoom (e) {
       const {lng, lat} = e.target.getCenter()
@@ -113,19 +119,26 @@ export default {
       this.zoom = e.target.getZoom()
     },
     select(val){
-        // console.log(val)
         this.city = val.value
         this.location = val.label
-        // console.log(this.location)
     },
     handelCreate(){
-        this.$post('/admin/area',{name:this.keyword,city:this.city,location:this.tude}).then(res =>{
-            if(res.status == 1){
-                this.$router.push({
-                    name:'areaList'
-                })
-            }
-        })
+        if(this.$route.query.id){
+            Bus.$emit('location',this.tude)
+            this.$router.go(-1)
+            Bus.$emit('showarea',true)
+        } else if(this.$route.query.shop){
+            Bus.$emit('shop',this.tude)
+            this.$router.go(-1)
+        }else{
+            this.$post('/admin/area',{name:this.keyword,city:this.city,location:this.tude}).then(res =>{
+                if(res.status == 1){
+                    this.$router.push({
+                        name:'areaList'
+                    })
+                }
+            })
+        }    
     }
   }
 }

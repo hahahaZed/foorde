@@ -46,7 +46,7 @@
                             :on-exceeded-size="handleMaxSize"
                             multiple
                             type="drag"
-                            action="https://api.foorde.com/imags?desc=Shop logo&category=logo"
+                            :action="actionurl"
                             style="display: inline-block;width:58px;"
                         >
                             <div style="width: 58px;height:58px;line-height: 58px;">
@@ -70,6 +70,7 @@
 <script>
 import Menu from "_c/menu"
 import Header from "_c/header"
+import config from "@/config"
 export default {
   name: 'imgUpdate',
   components: {
@@ -82,7 +83,7 @@ export default {
                 imgName: '',
                 visible: false,
                 uploadList: [],
-                // actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
+                actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
       }
   },
   

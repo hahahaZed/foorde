@@ -10,9 +10,8 @@
 
                 <!-- <Add /> -->
                 <Button type="primary" class="mb-10 add"  :to="{name:'addshop'}">add</Button>
-                <Edit  :data="adminData" />
                 <Card>
-                    <div style="height: 860px">
+                    <div style="height: auto">
                         <Table stripe border :columns="columns1" :data="data1">
                             <template slot-scope="{ row}" slot="id">
                                 <span>{{ row.id }}</span>
@@ -58,6 +57,13 @@
                                         @click="handleEdit(row, index)"
                                     >edit</Button>
                                 </div>
+                                <div class="add">
+                                    <Button
+                                        type="primary"
+                                        size="small"
+                                        @click="handleadd(row, index)"
+                                    >add</Button>
+                                </div>
                             </template>
                         </Table>
                         <Page
@@ -78,15 +84,11 @@
 import Menu from "_c/menu"
 import Header from "_c/header"
 
-import Edit from './edit.vue'
-
 export default {
   name: 'userlist',
   components: {
       Menu,
       Header,
-      
-      Edit
   },
   data () {
             return {
@@ -182,18 +184,17 @@ export default {
             },
             handleEdit(row){
                 const id = row.id
-            //     this.modal2 = true
-            //     Bus.$emit('showshop', 
-            //     this.modal2
-            // );
                 this.$router.push({
                     name: 'editshop',
                     query:{id}
                 })
-                // this.$get('/admin/shop/'+ id ).then(res=>{
-                //     this.adminData = res.data
-                //     this.modal2 = true
-                // })
+            },
+            handleadd(row){
+                const shop_id = row.id
+                this.$router.push({
+                    name: 'adminAdd',
+                    query:{shop_id}
+                })
             }
         }
 }
@@ -219,5 +220,8 @@ img{
 }
 /deep/.ivu-table-cell{
     padding:0;
+}
+.add{
+    margin-top:5px;
 }
 </style>

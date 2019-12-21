@@ -11,7 +11,7 @@
                 <Add />
                 <Edit  :data="adminData" />
                 <Card>
-                    <div style="height: 600px">
+                    <div style="height: auto">
                         <Table stripe border :columns="columns1" :data="data1">
                             <template slot-scope="{ row}" slot="id">
                                 <span>{{ row.id }}</span>
@@ -121,6 +121,7 @@ export default {
                 adminData:{},
             }
         },
+        
         created () {
             this.getdata()
         },  

@@ -5,11 +5,20 @@
                 <Input v-model="data.name" />
             </FormItem>
             <FormItem label="City">
-                <Input v-model="data.city" />
+                <Select v-model="model1" style="width:388px" label-in-value @on-change="select">
+                    <Option
+                        v-for="item in cityList"
+                        :value="item.value"
+                        :key="item.value"
+                    >{{ item.label }}</Option>
+                </Select>
             </FormItem>
             <FormItem label="Location">
                 <!-- <Input v-model="data.location" /> -->
-                <button to="{name:'area'}">aa</button>
+                <div>
+                    {{data.location}}
+                    <Button @click="toarea">Select region</Button>
+                </div>
             </FormItem>
         </Form>
         <Button type="primary" size="large" long @click="edit">ok</Button>
@@ -26,36 +35,59 @@ export default {
                 modal2:false,
                 form: {
                     id:'',
-                    user_name: '',
-                    nick_name: '',
-                    email: '',
-                    phone_number:'',
-                    password:''
+                    city: '',
+                    name: '',
+                    location: '',
                 },
+                model1: 0,
+                cityList:[]
             }
         },
         created(){
+            this.$get('/api/admin.area/getcity').then(res =>{
+                res.data.forEach(element =>{
+                    this.cityList.push({label:element,value:res.data.indexOf(element)})
+                })
+            })
         Bus.$on('showbox',(e)=>{
             this.modal2 = e
         })
+        Bus.$on('location',(e)=>{
+            this.data.location = e
+        })
+        Bus.$on('showarea',(e)=>{
+            this.modal2 = e
+        })
+        Bus.$on('city',(e)=>{
+            e = parseInt(e)
+            this.model1 = e
+        })
     },
+   
      methods: {
             edit () {
-                this.form.user_name = this.data.user_name
-                this.form.nick_name = this.data.nick_name
-                this.form.email = this.data.email
-                this.form.phone_number = this.data.phone_number
-                this.form.password = this.data.password
+                this.form.name = this.data.name
+                this.form.city = this.data.city
                 this.form.id = this.data.id
-                this.$post('api/admin.manager/edit',this.form).then(res => {
+                this.form.location = this.data.location
+                this.$post('/api/admin.area/edit',this.form).then(res => {
                     if(res.status !== 1){
-                        console.log(res.status)
-                        this.modal =true
+                        this.modal2 =true
                     }else{
-                        this.modal=false
+                        this.modal2=false
                     }
                 })
             },
+            toarea(){
+                this.$router.push({
+                    name:'area',
+                    query:{id:this.data.id,location:this.data.location}
+                })
+                this.modal2=false
+            },
+            select(val){
+            this.data.city =val.value
+        },
             
         }
 }

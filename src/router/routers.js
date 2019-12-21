@@ -1,10 +1,12 @@
 import userlist from './router-userlist'
 import shop from './router-shop'
 import foordearea from './router-foordeArea'
+import adminuser from './router-adminuser'
 const routersArr = [
     userlist,
     shop,
-    foordearea
+    foordearea,
+    adminuser
 ]
   
   const RouterConfig = []

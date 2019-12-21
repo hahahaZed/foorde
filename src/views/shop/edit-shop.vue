@@ -40,6 +40,9 @@
                             <FormItem label="Address">
                                 <Input v-model="data.address" style="width:388px"/>
                             </FormItem>
+                            <FormItem label="Location">
+                                <div>{{data.location}}</div><Button @click="toarea">Select region</Button>
+                            </FormItem>
                             <FormItem label="Email">
                                 <Input v-model="data.email" style="width:388px"/>
                             </FormItem>
@@ -125,6 +128,7 @@ export default {
                     desc:'',
                     area_id:'',
                     address:'',
+                    location:'',
                     email:'',
                     shop_type:'',
                     food_type:'',
@@ -132,23 +136,20 @@ export default {
                     number:''
                 },
                 typeList: [],
-                type: '',
+                type: 0,
 
                 foodList:[],
-                food:'',
+                food:0,
 
                 serviceList:[],
-                service:'',
+                service:0,
 
                 areaList:[],
-                area:''
+                area:0
             }
         },
     created(){
-        const id = this.$route.query.id
-         this.$get('/admin/shop/'+ id ).then(res=>{
-                    this.data = res.data
-        })
+        
         this.$get('/api/admin.shop/gettype').then(res =>{
             res.data.shop.forEach(element =>{
                 this.typeList.push({label:element,value:res.data.shop.indexOf(element)})
@@ -179,6 +180,10 @@ export default {
         Bus.$on('oldLicense',(e)=>{
             this.oldLicense = e
         })
+        Bus.$on('shop',(e)=>{
+            console.log(this.data.location)
+            this.data.location = e 
+        })
         // console.log(this.$route,query)
         // if(this.data){
         //         Bus.$emit('logo',
@@ -189,9 +194,10 @@ export default {
         // this.area = this.data.area
     },
     watch: {
-        
+        $route:function(){
+            this.getdata()
+        },
         data:function(val,old){
-            console.log(val, old)
             if(val!= old){
                 Bus.$emit('logo',
                     val.logo
@@ -207,15 +213,28 @@ export default {
         }
     },
      methods: {
+            getdata(){
+                const id = this.$route.query.id
+                this.$get('/admin/shop/'+ id ).then(res=>{
+                    this.data = res.data
+                    this.area =res.data.area_id
+                    this.type = parseInt(res.data.shop_type)
+                    this.food = parseInt(res.data.food_type)
+                    this.service =parseInt(res.data.service_type)
+        })
+            },
             edit () {
-                
                 this.form.name = this.data.name
                 this.form.desc = this.data.desc
                 this.form.email = this.data.email
                 this.form.address = this.data.address
+                this.form.location = this.data.location
                 this.form.number = this.data.number
+                this.form.area_id = this.area
+                this.form.shop_type = this.type
+                this.form.food_type = this.food
+                this.form.service_type = this.service
                 this.form.id = this.data.id
-                console.log(this.form)
                 this.$post('/api/admin.shop/edit',this.form).then(res => {
                     if(res.status == 1){
                         this.$router.push({
@@ -227,22 +246,24 @@ export default {
               // 营业类型
             selecttype(val){
                 this.form.shop_type = val.value
-                console.log(this.form.shop_type)
             },
             // 食物类型
             foodtype(val){
                 this.form.food_type = val.value
-                console.log(this.form.food_type)
             },
             // 服务类型
             servicetype(val){
                 this.form.service_type = val.value
-                console.log(this.form.service_type)
             },
             // 区域
             areatype(val){
-                console.log(val)
                 this.form.area_id = val.value
+            },
+            toarea(){
+                this.$router.push({
+                    name:'area',
+                    query:{shop:'editshoparae'}
+                })
             }
         }
 }
