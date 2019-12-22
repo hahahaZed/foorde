@@ -47,7 +47,8 @@ export default {
                 imgName: '',
                 visible: false,
                 uploadList: [],
-                actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags?desc=Business license address&category=license'
+                actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags?desc=Business license address&category=license',
+                url:''
       }
   },
 
@@ -55,6 +56,9 @@ created(){
       Bus.$on('License',(e) =>{
           this.uploadList=[{name:e,url:e}]
           Bus.$emit('oldLicense',this.uploadList[0].url)
+      }),
+      this.$get('/api/common.imags/url').then(res =>{
+          this.url =res.data.url
       })
   },
   methods: {
@@ -69,8 +73,8 @@ created(){
                 Bus.$emit('oldLicense',null)
             },
             handleSuccess (res, file) {
-                file.url =  res.data.url;
-                file.name =  res.data.url;
+                file.url =  this.url + "/" + res.data.url;
+                file.name =  this.url + "/" + res.data.url;
                 this.uploadList.push({name:file.name,url:file.url})
                 this.defaultList.push({name:file.name,url:file.url})
                 Bus.$emit('oldLicense',res.data.url)

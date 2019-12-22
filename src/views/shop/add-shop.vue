@@ -9,7 +9,7 @@
                 </Breadcrumb>
                 <Card>
                     <div style="height: auto">
-                        <Form :model="form" label-position="left" :label-width="100" inline>
+                        <Form :model="form" label-position="right" :label-width="100" inline>
                             <FormItem label="Name">
                                 <Input v-model="form.name" style="width:388px" />
                             </FormItem>

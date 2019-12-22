@@ -28,7 +28,7 @@ module.exports = {
   // then change this to '/my-app/'
 
   // baseUrl: BASE_URL,
-  outputDir: '../public/admin',
+  // outputDir: '../public/admin',
 
  
   // publicPath: BASE_URL,

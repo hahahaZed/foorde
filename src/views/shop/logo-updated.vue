@@ -23,7 +23,7 @@
             :on-exceeded-size="handleMaxSize"
             multiple
             type="drag"
-            action="https://api.foorde.com/imags?desc=Shop logo&category=logo"
+            :action="actionurl"
             style="display: inline-block;width:58px;"
         >
             <div style="width: 58px;height:58px;line-height: 58px;">
@@ -38,6 +38,7 @@
 
 <script>
 import Bus from '@/assets/Bus.js'
+import config from '@/config'
 export default {
   name: 'logoUpdate',
   data () {
@@ -46,10 +47,15 @@ export default {
                 imgName: '',
                 visible: false,
                 uploadList: [],
-                // actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags'
+                url:'',
+                actionurl:(process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro) + '/imags?desc=Shop logo&category=logo'
       }
   },
-  
+  created(){
+      this.$get('/api/common.imags/url').then(res =>{
+          this.url =res.data.url
+      })
+  },
   methods: {
             handleView (name) {
                 this.imgName = name;
@@ -60,8 +66,8 @@ export default {
                 this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
             },
             handleSuccess (res, file) {
-                file.url =  res.data.url;
-                file.name =  res.data.url;
+                file.url =  this.url + "/" + res.data.url;
+                file.name =  this.url + "/" + res.data.url;
                 Bus.$emit('addlogo',res.data.url)
             },
             handleFormatError (file) {

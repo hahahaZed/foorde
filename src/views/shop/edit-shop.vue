@@ -9,7 +9,7 @@
                 </Breadcrumb>
                 <Card>
                     <div style="height: auto">
-                        <Form :model="form" label-position="left" :label-width="100" inline>
+                        <Form :model="form" label-position="right" :label-width="100" inline>
                             <FormItem label="Name">
                                 <Input v-model="data.name" style="width:388px"/>
                             </FormItem>
@@ -145,11 +145,12 @@ export default {
                 service:0,
 
                 areaList:[],
-                area:0
+                area:0,
+
             }
         },
     created(){
-        
+        this.getdata()
         this.$get('/api/admin.shop/gettype').then(res =>{
             res.data.shop.forEach(element =>{
                 this.typeList.push({label:element,value:res.data.shop.indexOf(element)})
@@ -194,8 +195,10 @@ export default {
         // this.area = this.data.area
     },
     watch: {
-        $route:function(){
-            this.getdata()
+        $route:function(newval,oldval){
+            if(newval != oldval){
+                this.getdata()
+            }  
         },
         data:function(val,old){
             if(val!= old){
