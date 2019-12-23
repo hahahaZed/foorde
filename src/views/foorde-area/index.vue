@@ -42,7 +42,7 @@
                             @zoomend="syncCenterAndZoom"
                         >
                             <bm-marker
-                                :position="{lng: center.lng, lat: center.lat}"
+                                :position="{lng: marker.lng, lat: marker.lat}"
                                 :dragging="true"
                                 animation="BMAP_ANIMATION_BOUNCE"
                             ></bm-marker>
@@ -53,8 +53,8 @@
                             ></bm-local-search> -->
                         </baidu-map>
                         <div style="position:absolute;right:16px;top:16px">
-                            <input v-model.number="center.lng" />
-                            <input v-model.number="center.lat" />
+                            <input v-model.number="marker.lng" />
+                            <input v-model.number="marker.lat" />
                             <input v-model.number="zoom" />
                         </div>
                     </div>
@@ -83,6 +83,10 @@ export default {
         lng: 55.317797,
         lat: 25.238797
       },
+      marker: {
+        lng: 55.317797,
+        lat: 25.238797
+      },
       keyword: '',
       location: 'Dubai',
       zoom: 13,
@@ -101,21 +105,21 @@ export default {
       })
       if(this.$route.query.id){
           var location = this.$route.query.location.split('|')
-            this.center.lng =location[0]
-            this.center.lat = location[1]
+            this.marker.lng =location[0]
+            this.marker.lat = location[1]
       }
   },
   methods: {
     getClickInfo(e) {
-        this.center.lng = e.point.lng
-        this.center.lat = e.point.lat
-        this.tude = this.center.lng + "|" + this.center.lat
+        this.marker.lng = e.point.lng
+        this.marker.lat = e.point.lat
+        this.tude = this.marker.lng + "|" + this.marker.lat
     },
     syncCenterAndZoom (e) {
       const {lng, lat} = e.target.getCenter()
-      this.center.lng = lng
-      this.center.lat = lat
-      this.tude = this.center.lng + "|" + this.center.lat
+      this.marker.lng = lng
+      this.marker.lat = lat
+      this.tude = this.marker.lng + "|" + this.marker.lat
       this.zoom = e.target.getZoom()
     },
     select(val){
