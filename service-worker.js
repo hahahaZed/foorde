@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/admin/precache-manifest.225360130bccb49327821b79c3577e2d.js"
+  "/foorde/precache-manifest.96f4933dec109292d7ccb1add1b105db.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "foorde"});
