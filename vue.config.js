@@ -31,7 +31,7 @@ module.exports = {
   // outputDir: '../public/admin',
 
  
-  // publicPath: BASE_URL,
+  publicPath: BASE_URL,
 
   // outputDir: '../public/admin',
 
